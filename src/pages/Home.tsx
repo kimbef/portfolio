@@ -16,8 +16,7 @@ import {
   Code as CodeIcon,
   LaptopMac as LaptopIcon,
   PhoneIphone as PhoneIcon,
-  ArrowForward as ArrowForwardIcon,
-  DarkMode,
+  ArrowForward as ArrowForwardIcon
 } from '@mui/icons-material'
 
 const Home = () => {
