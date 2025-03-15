@@ -61,7 +61,7 @@ const Contact = () => {
             gutterBottom
             sx={{
               fontWeight: 'bold',
-              color: 'grey.100',
+              color: theme.palette.mode === 'dark' ? 'grey.100' : 'black',
               '& .highlight': {
                 background: `linear-gradient(to right, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
                 backgroundClip: 'text',
@@ -72,7 +72,7 @@ const Contact = () => {
           >
             Let's <span className="highlight">Connect</span>
           </Typography>
-          <Typography variant="h5" sx={{ color: 'grey.400', maxWidth: 600, mx: 'auto' }}>
+          <Typography variant="h5" sx={{ color: theme.palette.mode === 'dark' ? 'grey.400' : 'black', maxWidth: 600, mx: 'auto' }}>
             Have a question or want to work together? I'd love to hear from you.
           </Typography>
         </Box>
@@ -94,7 +94,7 @@ const Contact = () => {
               sx={{
                 p: 4,
                 textAlign: 'center',
-                bgcolor: 'grey.900',
+                bgcolor: theme.palette.mode === 'dark' ? 'grey.900' : 'white',
                 flex: 1,
                 cursor: info.link ? 'pointer' : 'default',
                 textDecoration: 'none',
@@ -102,7 +102,7 @@ const Contact = () => {
                 border: '1px solid rgba(255, 255, 255, 0.1)',
                 '&:hover': {
                   transform: 'translateY(-4px)',
-                  bgcolor: 'grey.800',
+                  bgcolor: theme.palette.mode === 'dark' ? 'grey.800' : 'grey.200',
                   borderColor: theme.palette.primary.main,
                   '& .icon': {
                     color: theme.palette.primary.main,
@@ -113,17 +113,17 @@ const Contact = () => {
               <Box
                 className="icon"
                 sx={{
-                  color: 'grey.300',
+                  color: theme.palette.mode === 'dark' ? 'grey.300' : 'black',
                   mb: 2,
                   transition: 'color 0.3s ease',
                 }}
               >
                 {info.icon}
               </Box>
-              <Typography variant="h6" gutterBottom sx={{ color: 'grey.100' }}>
+              <Typography variant="h6" gutterBottom sx={{ color: theme.palette.mode === 'dark' ? 'grey.100' : 'black' }}>
                 {info.title}
               </Typography>
-              <Typography sx={{ color: 'grey.400' }}>
+              <Typography sx={{ color: theme.palette.mode === 'dark' ? 'grey.400' : 'black' }}>
                 {info.detail}
               </Typography>
             </Paper>
@@ -138,7 +138,7 @@ const Contact = () => {
             maxWidth: 600,
             mx: 'auto',
             p: { xs: 3, md: 6 },
-            bgcolor: 'grey.900',
+            bgcolor: theme.palette.mode === 'dark' ? 'grey.900' : 'white',
             border: '1px solid rgba(255, 255, 255, 0.1)',
           }}
         >
@@ -161,10 +161,10 @@ const Contact = () => {
                   },
                 },
                 '& .MuiInputLabel-root': {
-                  color: 'grey.400',
+                  color: theme.palette.mode === 'dark' ? 'grey.400' : 'black',
                 },
                 '& .MuiOutlinedInput-input': {
-                  color: 'grey.100',
+                  color: theme.palette.mode === 'dark' ? 'grey.100' : 'black',
                 },
               }}
             />
@@ -187,10 +187,10 @@ const Contact = () => {
                   },
                 },
                 '& .MuiInputLabel-root': {
-                  color: 'grey.400',
+                  color: theme.palette.mode === 'dark' ? 'grey.400' : 'black',
                 },
                 '& .MuiOutlinedInput-input': {
-                  color: 'grey.100',
+                  color: theme.palette.mode === 'dark' ? 'grey.100' : 'black',
                 },
               }}
             />
@@ -214,10 +214,10 @@ const Contact = () => {
                   },
                 },
                 '& .MuiInputLabel-root': {
-                  color: 'grey.400',
+                  color: theme.palette.mode === 'dark' ? 'grey.400' : 'black',
                 },
                 '& .MuiOutlinedInput-input': {
-                  color: 'grey.100',
+                  color: theme.palette.mode === 'dark' ? 'grey.100' : 'black',
                 },
               }}
             />
@@ -246,4 +246,4 @@ const Contact = () => {
   )
 }
 
-export default Contact 
+export default Contact

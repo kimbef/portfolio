@@ -75,7 +75,7 @@ const Projects = () => {
             gutterBottom
             sx={{
               fontWeight: 'bold',
-              color: 'grey.100',
+              color: theme.palette.mode === 'dark' ? 'grey.100' : 'black',
               '& .highlight': {
                 background: `linear-gradient(to right, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
                 backgroundClip: 'text',
@@ -86,7 +86,7 @@ const Projects = () => {
           >
             My <span className="highlight">Projects</span>
           </Typography>
-          <Typography variant="h5" sx={{ color: 'grey.400', maxWidth: 800, mx: 'auto', mb: 4 }}>
+          <Typography variant="h5" sx={{ color: theme.palette.mode === 'dark' ? 'grey.400' : 'black', maxWidth: 800, mx: 'auto', mb: 4 }}>
             A showcase of my best work, featuring web applications built with modern technologies
           </Typography>
         </Box>
@@ -100,7 +100,7 @@ const Projects = () => {
                   height: '100%',
                   display: 'flex',
                   flexDirection: 'column',
-                  bgcolor: 'grey.900',
+                  bgcolor: theme.palette.mode === 'dark' ? 'grey.900' : 'white',
                   border: '1px solid rgba(255, 255, 255, 0.1)',
                   transition: 'all 0.3s ease',
                   '&:hover': {
@@ -129,10 +129,10 @@ const Projects = () => {
                   />
                 </Box>
                 <CardContent sx={{ flexGrow: 1 }}>
-                  <Typography variant="h5" component="h2" gutterBottom sx={{ color: 'grey.100' }}>
+                  <Typography variant="h5" component="h2" gutterBottom sx={{ color: theme.palette.mode === 'dark' ? 'grey.100' : 'black' }}>
                     {project.title}
                   </Typography>
-                  <Typography sx={{ color: 'grey.400', mb: 2 }}>
+                  <Typography sx={{ color: theme.palette.mode === 'dark' ? 'grey.400' : 'black', mb: 2 }}>
                     {project.description}
                   </Typography>
                   <Stack direction="row" spacing={1} flexWrap="wrap" gap={1}>
@@ -159,7 +159,7 @@ const Projects = () => {
                     rel="noopener noreferrer"
                     startIcon={<GitHubIcon />}
                     sx={{
-                      color: 'grey.300',
+                      color: theme.palette.mode === 'dark' ? 'grey.300' : 'black',
                       '&:hover': {
                         color: theme.palette.primary.main,
                       },
@@ -173,7 +173,7 @@ const Projects = () => {
                     rel="noopener noreferrer"
                     startIcon={<LaunchIcon />}
                     sx={{
-                      color: 'grey.300',
+                      color: theme.palette.mode === 'dark' ? 'grey.300' : 'black',
                       '&:hover': {
                         color: theme.palette.primary.main,
                       },

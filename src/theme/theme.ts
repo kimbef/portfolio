@@ -6,20 +6,20 @@ const theme = createTheme({
     mode: 'dark' as PaletteMode,
     primary: {
       main: '#2563eb', // blue-600
-      light: '#3b82f6',
-      dark: '#1d4ed8',
+      light: '#ffffff',
+      dark: '#000000',
     },
     secondary: {
       main: '#06b6d4', // cyan-500
-      light: '#22d3ee',
-      dark: '#0891b2',
+      light: '#ffffff',
+      dark: '#000000',
     },
     background: {
       default: '#111827', // gray-900
       paper: '#1f2937', // gray-800
     },
     text: {
-      primary: '#f3f4f6', // gray-100
+      primary: '#000000', // gray-100
       secondary: '#9ca3af', // gray-400
     },
   },

@@ -17,6 +17,7 @@ import {
   LaptopMac as LaptopIcon,
   PhoneIphone as PhoneIcon,
   ArrowForward as ArrowForwardIcon,
+  DarkMode,
 } from '@mui/icons-material'
 
 const Home = () => {
@@ -45,7 +46,7 @@ const Home = () => {
         }}>
           <Typography variant="h2" component="h1" gutterBottom sx={{ 
             fontWeight: 'bold',
-            color: 'grey.100',
+            color: theme.palette.mode === 'dark' ? 'white' : 'black',
             opacity: 1,
             '& .highlight': {
               background: `linear-gradient(to right, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
@@ -58,7 +59,7 @@ const Home = () => {
           </Typography>
           
           <Typography variant="h5" sx={{ 
-            color: 'grey.400',
+            color: theme.palette.mode === 'dark' ? 'white' : 'black',
             mb: 4 
           }}>
             A passionate Frontend Developer crafting beautiful web experiences with modern technologies.
@@ -95,13 +96,13 @@ const Home = () => {
                 px: 4,
                 py: 1.5,
                 borderWidth: 2,
-                color: 'grey.300',
-                borderColor: 'grey.300',
+                color: theme.palette.mode === 'dark' ? 'grey.300' : 'black',
+                borderColor: theme.palette.mode === 'dark' ? 'grey.300' : 'black',
                 '&:hover': {
                   borderWidth: 2,
                   transform: 'translateY(-2px)',
                   borderColor: theme.palette.primary.main,
-                  color: theme.palette.primary.main,
+                  color: theme.palette.primary.dark,
                 },
                 transition: 'all 0.3s ease',
               }}
@@ -162,7 +163,7 @@ const Home = () => {
             position: 'relative',
             mb: 6,
             pb: 2,
-            color: 'grey.100',
+            color: theme.palette.mode === 'dark' ? 'grey.100' : 'black',
             '&::after': {
               content: '""',
               position: 'absolute',
@@ -184,7 +185,7 @@ const Home = () => {
                 sx={{
                   height: '100%',
                   transition: 'all 0.3s ease',
-                  bgcolor: 'grey.900',
+                  bgcolor: theme.palette.mode === 'dark' ? 'grey.900' : 'white',
                   '&:hover': {
                     transform: 'translateY(-8px)',
                     boxShadow: `0 12px 24px -10px ${theme.palette.primary.main}33`,
@@ -203,12 +204,12 @@ const Home = () => {
                     {skill.icon}
                   </Box>
                   <Typography variant="h6" gutterBottom sx={{
-                    color: 'grey.100',
+                    color: theme.palette.mode === 'dark' ? 'grey.100' : 'black',
                   }}>
                     {skill.title}
                   </Typography>
                   <Typography variant="body1" sx={{
-                    color: 'grey.400',
+                    color: theme.palette.mode === 'dark' ? 'grey.400' : 'black',
                   }}>
                     {skill.desc}
                   </Typography>
@@ -228,7 +229,7 @@ const Home = () => {
             rel="noopener noreferrer"
             sx={{
               p: 2,
-              color: 'grey.300',
+              color: theme.palette.mode === 'dark' ? 'grey.300' : 'black',
               transition: 'all 0.3s ease',
               '&:hover': {
                 transform: 'translateY(-4px)',
@@ -245,7 +246,7 @@ const Home = () => {
             rel="noopener noreferrer"
             sx={{
               p: 2,
-              color: 'grey.300',
+              color: theme.palette.mode === 'dark' ? 'grey.300' : 'black',
               transition: 'all 0.3s ease',
               '&:hover': {
                 transform: 'translateY(-4px)',
