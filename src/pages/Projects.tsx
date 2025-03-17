@@ -40,8 +40,8 @@ const projects: Project[] = [
     description: 'A responsive portfolio website built with React, TypeScript, and Material UI. Features smooth animations, dark mode, and modern design principles.',
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800',
     tags: ['React', 'TypeScript', 'Material UI', 'Framer Motion'],
-    githubLink: 'https://github.com/yourusername/portfolio',
-    demoLink: 'https://your-portfolio.com'
+    githubLink: 'https://github.com/kimbef/portfolio',
+    demoLink: 'https://kimbef-portfolio.vercel.app/'
   },
   {
     title: 'E-Commerce Dashboard',
