@@ -36,26 +36,26 @@ const projects: Project[] = [
     demoLink: 'https://blog-zwei.vercel.app'
   },
   {
-    title: 'Modern Portfolio',
-    description: 'A responsive portfolio website built with React, TypeScript, and Material UI. Features smooth animations, dark mode, and modern design principles.',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800',
-    tags: ['React', 'TypeScript', 'Material UI', 'Framer Motion'],
+    title: 'My Developer Portfolio',
+    description: 'A modern portfolio website showcasing my projects and skills. Features a responsive design with Material UI components, dark/light mode toggle, smooth animations, and a mobile-first approach. Built with React and TypeScript for optimal performance.',
+    image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80',
+    tags: ['React', 'TypeScript', 'Material UI', 'Dark Mode', 'Responsive Design'],
     githubLink: 'https://github.com/kimbef/portfolio',
     demoLink: 'https://portfolio-kimbeff.vercel.app/'
   },
   {
     title: 'E-Commerce Online Store',
-    description: 'An online store for buying and selling products. Built with React and includes data visualization, real-time updates, and responsive design.',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800',
-    tags: ['React', 'TypeScript', 'Redux', 'Chart.js', 'Material UI'],
+    description: 'A comprehensive e-commerce platform built with React and Chakra UI. Features include product catalog with filtering, shopping cart functionality, user authentication, and a responsive checkout process. Implements Context API for state management and Chakra UI for a modern interface.',
+    image: 'https://images.unsplash.com/photo-1607082349566-187342175e2f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+    tags: ['React', 'TypeScript', 'Chakra UI', 'Context API', 'E-commerce'],
     githubLink: 'https://github.com/kimbef/reakt2',
     demoLink: 'https://reakt2.vercel.app/'
   },
   {
     title: 'Weather App',
-    description: 'A beautiful weather application with real-time updates, animations, and detailed forecasts. Features location-based weather data and interactive maps.',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800',
-    tags: ['React', 'TypeScript', 'API Integration', 'Styled Components'],
+    description: 'An elegant weather application that provides real-time weather information using the OpenWeather API. Features include current weather conditions, 5-day forecast, location-based weather data, and beautiful weather animations. Built with React and styled-components for a polished UI.',
+    image: 'https://images.unsplash.com/photo-1580193769210-b8d1c049a7d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80',
+    tags: ['React', 'TypeScript', 'Weather API', 'Styled Components', 'Animations'],
     githubLink: 'https://github.com/kimbef/forecaster',
     demoLink: 'https://v0-weather-app-ui-rose.vercel.app/'
   }

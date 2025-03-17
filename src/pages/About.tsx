@@ -43,10 +43,10 @@ const About = () => {
 
   const experiences = [
     {
-      period: '2025 - 2025 (1 month)',
+      period: '2025 jan - 2025 feb (1 month)',
       role: 'Technical Assistant(internship)',
       company: 'CRM Kraft.',
-      description: 'Managed and maintained the CRM system, provided technical support to the sales team, and assisted with data entry and reporting.',
+      description: 'Assisted in maintaining the functional stability of the CRM system, provided technical support to the sales team, and assisted with data entry and reporting.',
     },
     {
       period: '2021 - 2024',
@@ -132,12 +132,12 @@ const About = () => {
                 Hi, I'm Kliment Petrov
               </Typography>
               <Typography sx={{ color: theme.palette.mode === 'dark' ? 'grey.400' : 'black', lineHeight: 1.8 }}>
-                I'm a passionate Frontend Developer with over 5 years of experience in creating modern web applications. 
-                I specialize in React, TypeScript, and modern frontend technologies.
+                I'm a passionate Frontend Developer with 3 years of experience with javascript in university and 1 year of freelance experience with js frameworks.   
+                I specialize in React with Vite and Material UI/Chakra UI with TypeScript (prefer for styling).
               </Typography>
               <Typography sx={{ color: theme.palette.mode === 'dark' ? 'grey.400' : 'black', lineHeight: 1.8 }}>
-                My journey in web development started with a curiosity for creating beautiful user interfaces. 
-                Today, I focus on building scalable, performant applications that provide exceptional user experiences.
+                My journey in web development started with a curiosity for creating beautiful and responsive user interfaces. 
+                Today, I focus on building simple but functional web applications, polished design and proper styling that provide exceptional user experiences.
               </Typography>
               <Typography sx={{ color: theme.palette.mode === 'dark' ? 'grey.400' : 'black', lineHeight: 1.8 }}>
                 When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, 
