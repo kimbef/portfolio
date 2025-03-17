@@ -1,12 +1,12 @@
+import { useState } from 'react'
 import {
   Box,
-  Container,
   Typography,
+  Container,
   Grid,
   Card,
   CardContent,
   CardMedia,
-  CardActions,
   Button,
   Chip,
   Stack,
@@ -16,6 +16,10 @@ import {
   GitHub as GitHubIcon,
   Launch as LaunchIcon,
 } from '@mui/icons-material'
+import { motion } from 'framer-motion'
+
+const MotionCard = motion(Card)
+const MotionBox = motion(Box)
 
 interface Project {
   title: string;
@@ -63,52 +67,124 @@ const projects: Project[] = [
 
 const Projects = () => {
   const theme = useTheme()
+  const [hoveredProject, setHoveredProject] = useState<number | null>(null)
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  }
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    }
+  }
 
   return (
     <Container maxWidth="lg">
-      <Box sx={{ py: { xs: 4, md: 8 } }}>
+      <MotionBox
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+        sx={{ py: { xs: 4, md: 8 } }}
+      >
         {/* Header Section */}
-        <Box sx={{ textAlign: 'center', mb: 8 }}>
+        <MotionBox
+          variants={itemVariants}
+          sx={{
+            textAlign: 'center',
+            mb: 12,
+            position: 'relative',
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              top: -20,
+              left: '50%',
+              transform: 'translateX(-50%)',
+              width: '100px',
+              height: '4px',
+              background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+              borderRadius: '2px',
+            }
+          }}
+        >
           <Typography
             variant="h2"
             component="h1"
             gutterBottom
             sx={{
               fontWeight: 'bold',
-              color: theme.palette.mode === 'dark' ? 'grey.100' : 'black',
-              '& .highlight': {
-                background: `linear-gradient(to right, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
-                backgroundClip: 'text',
-                color: 'transparent',
-                display: 'inline-block',
+              color: '#FFD700',
+              fontFamily: '"Playfair Display", serif',
+              fontSize: { xs: '2.5rem', md: '3.5rem' },
+              mb: 3,
+              position: 'relative',
+              '&::before': {
+                content: '""',
+                position: 'absolute',
+                top: 0,
+                left: '-5%',
+                width: '110%',
+                height: '100%',
+                backgroundColor: 'rgba(255, 215, 0, 0.1)',
+                borderRadius: '8px',
+                zIndex: -1,
               }
             }}
           >
-            My <span className="highlight">Projects</span>
+            My Projects
           </Typography>
-          <Typography variant="h5" sx={{ color: theme.palette.mode === 'dark' ? 'grey.400' : 'black', maxWidth: 800, mx: 'auto', mb: 4 }}>
+          <Typography
+            variant="h5"
+            sx={{
+              color: theme.palette.mode === 'dark' ? 'grey.400' : 'black',
+              maxWidth: 800,
+              mx: 'auto',
+              fontFamily: '"Inter", sans-serif',
+              lineHeight: 1.8,
+            }}
+          >
             A showcase of my best work, featuring web applications built with modern technologies
           </Typography>
-        </Box>
+        </MotionBox>
 
         {/* Projects Grid */}
         <Grid container spacing={4}>
           {projects.map((project, index) => (
-            <Grid item xs={12} md={6} lg={4} key={index}>
-              <Card
+            <Grid item xs={12} md={6} key={index}>
+              <MotionCard
+                variants={itemVariants}
+                onHoverStart={() => setHoveredProject(index)}
+                onHoverEnd={() => setHoveredProject(null)}
                 sx={{
                   height: '100%',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  bgcolor: theme.palette.mode === 'dark' ? 'grey.900' : 'white',
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  bgcolor: theme.palette.mode === 'dark' ? 'rgba(18, 18, 18, 0.8)' : 'rgba(255, 255, 255, 0.8)',
+                  backdropFilter: 'blur(10px)',
+                  border: '1px solid',
+                  borderColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)',
+                  borderRadius: '20px',
+                  overflow: 'hidden',
                   transition: 'all 0.3s ease',
+                  boxShadow: theme.palette.mode === 'dark' 
+                    ? '0 8px 32px rgba(0, 0, 0, 0.3)'
+                    : '0 8px 32px rgba(0, 0, 0, 0.1)',
                   '&:hover': {
-                    transform: 'translateY(-8px)',
-                    borderColor: theme.palette.primary.main,
-                    '& .project-image': {
-                      transform: 'scale(1.1)',
-                    },
+                    transform: 'translateY(-10px)',
+                    borderColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
+                    boxShadow: theme.palette.mode === 'dark' 
+                      ? '0 20px 40px rgba(0, 0, 0, 0.4)'
+                      : '0 20px 40px rgba(0, 0, 0, 0.15)',
                   },
                 }}
               >
@@ -117,7 +193,6 @@ const Projects = () => {
                     component="img"
                     image={project.image}
                     alt={project.title}
-                    className="project-image"
                     sx={{
                       position: 'absolute',
                       top: 0,
@@ -125,70 +200,111 @@ const Projects = () => {
                       width: '100%',
                       height: '100%',
                       transition: 'transform 0.3s ease',
+                      transform: hoveredProject === index ? 'scale(1.1)' : 'scale(1)',
                     }}
                   />
+                  <Box
+                    sx={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      background: `linear-gradient(to bottom, transparent, ${theme.palette.mode === 'dark' ? 'rgba(0, 0, 0, 0.8)' : 'rgba(0, 0, 0, 0.6)'})`,
+                      opacity: hoveredProject === index ? 1 : 0,
+                      transition: 'opacity 0.3s ease',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: 2,
+                    }}
+                  >
+                    <Button
+                      component="a"
+                      href={project.githubLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      variant="contained"
+                      startIcon={<GitHubIcon />}
+                      sx={{
+                        bgcolor: 'white',
+                        color: 'black',
+                        '&:hover': {
+                          bgcolor: 'grey.100',
+                        },
+                      }}
+                    >
+                      Code
+                    </Button>
+                    <Button
+                      component="a"
+                      href={project.demoLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      variant="contained"
+                      startIcon={<LaunchIcon />}
+                      sx={{
+                        bgcolor: theme.palette.primary.main,
+                        color: 'white',
+                        '&:hover': {
+                          bgcolor: theme.palette.primary.dark,
+                        },
+                      }}
+                    >
+                      Live Demo
+                    </Button>
+                  </Box>
                 </Box>
-                <CardContent sx={{ flexGrow: 1 }}>
-                  <Typography variant="h5" component="h2" gutterBottom sx={{ color: theme.palette.mode === 'dark' ? 'grey.100' : 'black' }}>
-                    {project.title}
-                  </Typography>
-                  <Typography sx={{ color: theme.palette.mode === 'dark' ? 'grey.400' : 'black', mb: 2 }}>
-                    {project.description}
-                  </Typography>
-                  <Stack direction="row" spacing={1} flexWrap="wrap" gap={1}>
-                    {project.tags.map((tag) => (
-                      <Chip
-                        key={tag}
-                        label={tag}
+                <CardContent sx={{ p: 4 }}>
+                  <Stack spacing={2}>
+                    <Box>
+                      <Typography
+                        variant="h6"
+                        gutterBottom
                         sx={{
-                          bgcolor: 'rgba(37, 99, 235, 0.1)',
-                          color: theme.palette.primary.main,
-                          borderRadius: '16px',
-                          '&:hover': {
-                            bgcolor: 'rgba(37, 99, 235, 0.2)',
-                          },
+                          fontFamily: '"Inter", sans-serif',
+                          fontWeight: 600,
+                          color: theme.palette.mode === 'dark' ? 'grey.100' : 'black',
                         }}
-                      />
-                    ))}
+                      >
+                        {project.title}
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          fontFamily: '"Inter", sans-serif',
+                          color: theme.palette.mode === 'dark' ? 'grey.400' : 'grey.700',
+                          mb: 2,
+                        }}
+                      >
+                        {project.description}
+                      </Typography>
+                    </Box>
+                    <Stack direction="row" spacing={1} flexWrap="wrap" gap={1}>
+                      {project.tags.map((tag, tagIndex) => (
+                        <Chip
+                          key={tagIndex}
+                          label={tag}
+                          size="small"
+                          sx={{
+                            bgcolor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
+                            color: theme.palette.mode === 'dark' ? 'grey.300' : 'black',
+                            '&:hover': {
+                              bgcolor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.2)',
+                            },
+                          }}
+                        />
+                      ))}
+                    </Stack>
                   </Stack>
                 </CardContent>
-                <CardActions sx={{ p: 2, pt: 0 }}>
-                  <Button
-                    href={project.githubLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    startIcon={<GitHubIcon />}
-                    sx={{
-                      color: theme.palette.mode === 'dark' ? 'grey.300' : 'black',
-                      '&:hover': {
-                        color: theme.palette.primary.main,
-                      },
-                    }}
-                  >
-                    Code
-                  </Button>
-                  <Button
-                    href={project.demoLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    startIcon={<LaunchIcon />}
-                    sx={{
-                      color: theme.palette.mode === 'dark' ? 'grey.300' : 'black',
-                      '&:hover': {
-                        color: theme.palette.primary.main,
-                      },
-                    }}
-                  >
-                    Live Demo
-                  </Button>
-                </CardActions>
-              </Card>
+              </MotionCard>
             </Grid>
           ))}
         </Grid>
-      </Box>
+      </MotionBox>
     </Container>
-  );
-};
+  )
+}
 
-export default Projects; 
+export default Projects 
