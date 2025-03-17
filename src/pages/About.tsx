@@ -22,6 +22,16 @@ const MotionPaper = motion(Paper)
 const About = () => {
   const theme = useTheme()
 
+  const gradientText = {
+    background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+    backgroundClip: 'text',
+    WebkitBackgroundClip: 'text',
+    color: 'transparent',
+    WebkitTextFillColor: 'transparent'
+  }
+
+  const lightModeShadow = theme.palette.mode === 'light' ? '0 8px 32px rgba(0, 0, 0, 0.1)' : 'none'
+
   const skills = {
     frontend: [
       { name: 'React.js', level: 65 },
@@ -106,7 +116,7 @@ const About = () => {
               transform: 'translateX(-50%)',
               width: '100px',
               height: '4px',
-              background: '#FFD700',
+              background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
               borderRadius: '2px',
             }
           }}
@@ -117,11 +127,11 @@ const About = () => {
             gutterBottom
             sx={{
               fontWeight: 'bold',
-              color: '#FFD700',
               fontFamily: '"Playfair Display", serif',
               fontSize: { xs: '2.5rem', md: '3.5rem' },
               mb: 3,
               position: 'relative',
+              ...gradientText,
               '&::before': {
                 content: '""',
                 position: 'absolute',
@@ -129,7 +139,7 @@ const About = () => {
                 left: '-5%',
                 width: '110%',
                 height: '100%',
-                backgroundColor: 'rgba(255, 215, 0, 0.1)',
+                backgroundColor: theme.palette.mode === 'light' ? 'rgba(0, 0, 0, 0.03)' : 'rgba(255, 215, 0, 0.1)',
                 borderRadius: '8px',
                 zIndex: -1,
               }
@@ -167,8 +177,10 @@ const About = () => {
                   overflow: 'hidden',
                   aspectRatio: '4/3',
                   bgcolor: theme.palette.mode === 'dark' ? 'grey.900' : 'white',
-                  border: '1px solid rgba(255, 215, 0, 0.2)',
+                  border: '1px solid',
+                  borderColor: theme.palette.mode === 'light' ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 215, 0, 0.2)',
                   borderRadius: '20px',
+                  boxShadow: lightModeShadow,
                 }}
               >
                 <Box
@@ -194,43 +206,24 @@ const About = () => {
                 <Typography 
                   variant="h4" 
                   sx={{ 
-                    color: theme.palette.mode === 'dark' ? 'grey.100' : 'black', 
                     fontWeight: 'bold',
                     fontFamily: '"Playfair Display", serif',
+                    color: theme.palette.mode === 'dark' ? 'white' : '#1a1a1a'
                   }}
                 >
                   Hi, I'm Kliment Petrov
                 </Typography>
                 <Typography 
                   sx={{ 
-                    color: theme.palette.mode === 'dark' ? 'grey.400' : 'black', 
                     lineHeight: 1.8,
                     fontFamily: '"Inter", sans-serif',
+                    color: theme.palette.mode === 'dark' ? 'white' : '#1a1a1a'
                   }}
                 >
                   I'm a passionate Frontend Developer with 3 years of experience with javascript in university and 1 year of freelance experience with js frameworks.   
                   I specialize in React with Vite and Material UI/Chakra UI with TypeScript (prefer for styling).
                 </Typography>
-                <Typography 
-                  sx={{ 
-                    color: theme.palette.mode === 'dark' ? 'grey.400' : 'black', 
-                    lineHeight: 1.8,
-                    fontFamily: '"Inter", sans-serif',
-                  }}
-                >
-                  My journey in web development started with a curiosity for creating beautiful and responsive user interfaces. 
-                  Today, I focus on building simple but functional web applications, polished design and proper styling that provide exceptional user experiences.
-                </Typography>
-                <Typography 
-                  sx={{ 
-                    color: theme.palette.mode === 'dark' ? 'grey.400' : 'black', 
-                    lineHeight: 1.8,
-                    fontFamily: '"Inter", sans-serif',
-                  }}
-                >
-                  When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, 
-                  or sharing my knowledge through blog posts and tutorials.
-                </Typography>
+                
               </Stack>
             </MotionBox>
           </Grid>
@@ -241,12 +234,12 @@ const About = () => {
           <Typography
             variant="h3"
             sx={{
-              color: '#FFD700',
               fontWeight: 'bold',
               mb: 6,
               textAlign: 'center',
               position: 'relative',
               fontFamily: '"Playfair Display", serif',
+              ...gradientText,
               '&::before': {
                 content: '""',
                 position: 'absolute',
@@ -254,7 +247,7 @@ const About = () => {
                 left: '25%',
                 width: '50%',
                 height: '100%',
-                backgroundColor: 'rgba(255, 215, 0, 0.1)',
+                backgroundColor: theme.palette.mode === 'light' ? 'rgba(0, 0, 0, 0.03)' : 'rgba(255, 215, 0, 0.1)',
                 borderRadius: '8px',
                 zIndex: -1,
               }
@@ -270,9 +263,11 @@ const About = () => {
                 sx={{
                   p: 4,
                   bgcolor: theme.palette.mode === 'dark' ? 'grey.900' : 'white',
-                  border: '1px solid rgba(255, 215, 0, 0.2)',
+                  border: '1px solid',
+                  borderColor: theme.palette.mode === 'light' ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 215, 0, 0.2)',
                   borderRadius: '20px',
                   height: '100%',
+                  boxShadow: lightModeShadow,
                 }}
               >
                 <Box sx={{ color: '#FFD700', mb: 2 }}>
@@ -281,9 +276,9 @@ const About = () => {
                 <Typography 
                   variant="h6" 
                   sx={{ 
-                    color: theme.palette.mode === 'dark' ? 'grey.100' : 'black', 
                     mb: 3,
                     fontFamily: '"Playfair Display", serif',
+                    ...gradientText
                   }}
                 >
                   Frontend
@@ -292,8 +287,8 @@ const About = () => {
                   {skills.frontend.map((skill) => (
                     <Box key={skill.name}>
                       <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                        <Typography sx={{ color: theme.palette.mode === 'dark' ? 'grey.400' : 'black' }}>{skill.name}</Typography>
-                        <Typography sx={{ color: theme.palette.mode === 'dark' ? 'grey.400' : 'black' }}>{skill.level}%</Typography>
+                        <Typography sx={{ color: theme.palette.mode === 'dark' ? 'white' : '#1a1a1a' }}>{skill.name}</Typography>
+                        <Typography sx={{ color: theme.palette.mode === 'dark' ? 'white' : '#1a1a1a' }}>{skill.level}%</Typography>
                       </Box>
                       <LinearProgress
                         variant="determinate"
@@ -317,9 +312,11 @@ const About = () => {
                 sx={{
                   p: 4,
                   bgcolor: theme.palette.mode === 'dark' ? 'grey.900' : 'white',
-                  border: '1px solid rgba(255, 215, 0, 0.2)',
+                  border: '1px solid',
+                  borderColor: theme.palette.mode === 'light' ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 215, 0, 0.2)',
                   borderRadius: '20px',
                   height: '100%',
+                  boxShadow: lightModeShadow,
                 }}
               >
                 <Box sx={{ color: '#FFD700', mb: 2 }}>
@@ -328,9 +325,9 @@ const About = () => {
                 <Typography 
                   variant="h6" 
                   sx={{ 
-                    color: theme.palette.mode === 'dark' ? 'grey.100' : 'black', 
                     mb: 3,
                     fontFamily: '"Playfair Display", serif',
+                    ...gradientText
                   }}
                 >
                   Backend
@@ -339,8 +336,8 @@ const About = () => {
                   {skills.backend.map((skill) => (
                     <Box key={skill.name}>
                       <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                        <Typography sx={{ color: theme.palette.mode === 'dark' ? 'grey.400' : 'black' }}>{skill.name}</Typography>
-                        <Typography sx={{ color: theme.palette.mode === 'dark' ? 'grey.400' : 'black' }}>{skill.level}%</Typography>
+                        <Typography sx={{ color: theme.palette.mode === 'dark' ? 'white' : '#1a1a1a' }}>{skill.name}</Typography>
+                        <Typography sx={{ color: theme.palette.mode === 'dark' ? 'white' : '#1a1a1a' }}>{skill.level}%</Typography>
                       </Box>
                       <LinearProgress
                         variant="determinate"
@@ -364,9 +361,11 @@ const About = () => {
                 sx={{
                   p: 4,
                   bgcolor: theme.palette.mode === 'dark' ? 'grey.900' : 'white',
-                  border: '1px solid rgba(255, 215, 0, 0.2)',
+                  border: '1px solid',
+                  borderColor: theme.palette.mode === 'light' ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 215, 0, 0.2)',
                   borderRadius: '20px',
                   height: '100%',
+                  boxShadow: lightModeShadow,
                 }}
               >
                 <Box sx={{ color: '#FFD700', mb: 2 }}>
@@ -375,9 +374,9 @@ const About = () => {
                 <Typography 
                   variant="h6" 
                   sx={{ 
-                    color: theme.palette.mode === 'dark' ? 'grey.100' : 'black', 
                     mb: 3,
                     fontFamily: '"Playfair Display", serif',
+                    ...gradientText
                   }}
                 >
                   Tools & Others
@@ -386,8 +385,8 @@ const About = () => {
                   {skills.tools.map((skill) => (
                     <Box key={skill.name}>
                       <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                        <Typography sx={{ color: theme.palette.mode === 'dark' ? 'grey.400' : 'black' }}>{skill.name}</Typography>
-                        <Typography sx={{ color: theme.palette.mode === 'dark' ? 'grey.400' : 'black' }}>{skill.level}%</Typography>
+                        <Typography sx={{ color: theme.palette.mode === 'dark' ? 'white' : '#1a1a1a' }}>{skill.name}</Typography>
+                        <Typography sx={{ color: theme.palette.mode === 'dark' ? 'white' : '#1a1a1a' }}>{skill.level}%</Typography>
                       </Box>
                       <LinearProgress
                         variant="determinate"
@@ -412,12 +411,12 @@ const About = () => {
           <Typography
             variant="h3"
             sx={{
-              color: '#FFD700',
               fontWeight: 'bold',
               mb: 6,
               textAlign: 'center',
               position: 'relative',
               fontFamily: '"Playfair Display", serif',
+              ...gradientText,
               '&::before': {
                 content: '""',
                 position: 'absolute',
@@ -425,7 +424,7 @@ const About = () => {
                 left: '25%',
                 width: '50%',
                 height: '100%',
-                backgroundColor: 'rgba(255, 215, 0, 0.1)',
+                backgroundColor: theme.palette.mode === 'light' ? 'rgba(0, 0, 0, 0.03)' : 'rgba(255, 215, 0, 0.1)',
                 borderRadius: '8px',
                 zIndex: -1,
               }
@@ -442,9 +441,11 @@ const About = () => {
                 sx={{
                   p: 4,
                   bgcolor: theme.palette.mode === 'dark' ? 'grey.900' : 'white',
-                  border: '1px solid rgba(255, 215, 0, 0.2)',
+                  border: '1px solid',
+                  borderColor: theme.palette.mode === 'light' ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 215, 0, 0.2)',
                   borderRadius: '20px',
                   position: 'relative',
+                  boxShadow: lightModeShadow,
                   '&::before': {
                     content: '""',
                     position: 'absolute',
@@ -452,7 +453,7 @@ const About = () => {
                     top: 0,
                     height: '100%',
                     width: '4px',
-                    background: '#FFD700',
+                    background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
                     borderRadius: '2px',
                   }
                 }}
@@ -460,8 +461,8 @@ const About = () => {
                 <Grid container spacing={2}>
                   <Grid item xs={12} md={3}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
-                      <WorkIcon sx={{ color: '#FFD700' }} />
-                      <Typography sx={{ color: '#FFD700', fontWeight: 'bold' }}>
+                      <WorkIcon sx={{ ...gradientText }} />
+                      <Typography sx={{ ...gradientText, fontWeight: 'bold' }}>
                         {exp.period}
                       </Typography>
                     </Box>
@@ -470,26 +471,26 @@ const About = () => {
                     <Typography 
                       variant="h6" 
                       sx={{ 
-                        color: theme.palette.mode === 'dark' ? 'grey.100' : 'black', 
                         mb: 1,
                         fontFamily: '"Playfair Display", serif',
+                        ...gradientText
                       }}
                     >
                       {exp.role}
                     </Typography>
                     <Typography 
                       sx={{ 
-                        color: '#FFD700', 
                         mb: 2,
                         fontFamily: '"Inter", sans-serif',
+                        color: theme.palette.mode === 'dark' ? 'white' : '#1a1a1a'
                       }}
                     >
                       {exp.company}
                     </Typography>
                     <Typography 
                       sx={{ 
-                        color: theme.palette.mode === 'dark' ? 'grey.400' : 'black',
                         fontFamily: '"Inter", sans-serif',
+                        color: theme.palette.mode === 'dark' ? 'white' : '#1a1a1a'
                       }}
                     >
                       {exp.description}

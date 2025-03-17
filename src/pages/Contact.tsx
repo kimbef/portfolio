@@ -25,6 +25,16 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const theme = useTheme()
 
+  const gradientText = {
+    background: 'linear-gradient(45deg, #9370DB, #B19CD9)',
+    backgroundClip: 'text',
+    WebkitBackgroundClip: 'text',
+    color: 'transparent',
+    WebkitTextFillColor: 'transparent'
+  }
+
+  const lightModeShadow = theme.palette.mode === 'light' ? '0 8px 32px rgba(0, 0, 0, 0.1)' : 'none'
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
@@ -35,19 +45,19 @@ const Contact = () => {
 
   const contactInfo = [
     {
-      icon: <EmailIcon fontSize="large" />,
+      icon: <EmailIcon fontSize="large" sx={{ color: theme.palette.mode === 'dark' ? 'white' : '#1a1a1a' }} />,
       title: 'Email',
       detail: 'face7onol@gmail.com',
       link: 'mailto: face7onol@gmail.com'
     },
     {
-      icon: <LocationIcon fontSize="large" />,
+      icon: <LocationIcon fontSize="large" sx={{ color: theme.palette.mode === 'dark' ? 'white' : '#1a1a1a' }} />,
       title: 'Location',
       detail: 'Vidin, Bulgaria',
       link: null
     },
     {
-      icon: <PhoneIcon fontSize="large" />,
+      icon: <PhoneIcon fontSize="large" sx={{ color: theme.palette.mode === 'dark' ? 'white' : '#1a1a1a' }} />,
       title: 'Phone',
       detail: '+359 876 227 442',
       link: 'tel: 0876227442'
@@ -99,7 +109,7 @@ const Contact = () => {
               transform: 'translateX(-50%)',
               width: '100px',
               height: '4px',
-              background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+              background: 'linear-gradient(45deg, #9370DB, #B19CD9)',
               borderRadius: '2px',
             }
           }}
@@ -110,11 +120,11 @@ const Contact = () => {
             gutterBottom
             sx={{
               fontWeight: 'bold',
-              color: '#FFD700',
               fontFamily: '"Playfair Display", serif',
               fontSize: { xs: '2.5rem', md: '3.5rem' },
               mb: 3,
               position: 'relative',
+              color: theme.palette.mode === 'dark' ? 'white' : '#1a1a1a',
               '&::before': {
                 content: '""',
                 position: 'absolute',
@@ -122,7 +132,7 @@ const Contact = () => {
                 left: '-5%',
                 width: '110%',
                 height: '100%',
-                backgroundColor: 'rgba(255, 215, 0, 0.1)',
+                backgroundColor: theme.palette.mode === 'light' ? 'rgba(0, 0, 0, 0.03)' : 'rgba(255, 215, 0, 0.1)',
                 borderRadius: '8px',
                 zIndex: -1,
               }
@@ -133,11 +143,11 @@ const Contact = () => {
           <Typography 
             variant="h5" 
             sx={{ 
-              color: theme.palette.mode === 'dark' ? 'grey.400' : 'black', 
               maxWidth: 600, 
               mx: 'auto',
               fontFamily: '"Inter", sans-serif',
               lineHeight: 1.8,
+              color: theme.palette.mode === 'dark' ? 'white' : '#1a1a1a'
             }}
           >
             Have a question or want to work together? I'd love to hear from you.
@@ -172,36 +182,20 @@ const Contact = () => {
                     textDecoration: 'none',
                     transition: 'all 0.3s ease',
                     border: '1px solid',
-                    borderColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)',
+                    borderColor: theme.palette.mode === 'light' ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 215, 0, 0.2)',
                     borderRadius: '20px',
                     position: 'relative',
                     overflow: 'hidden',
-                    boxShadow: theme.palette.mode === 'dark' 
-                      ? '0 8px 32px rgba(0, 0, 0, 0.3)'
-                      : '0 8px 32px rgba(0, 0, 0, 0.1)',
-                    '&::before': {
-                      content: '""',
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      width: '100%',
-                      height: '100%',
-                      background: `linear-gradient(45deg, ${theme.palette.primary.main}11, ${theme.palette.secondary.main}11)`,
-                      opacity: 0,
-                      transition: 'opacity 0.3s ease',
-                    },
+                    boxShadow: lightModeShadow,
                     '&:hover': {
                       transform: 'translateY(-10px)',
-                      borderColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
-                      boxShadow: theme.palette.mode === 'dark' 
-                        ? '0 20px 40px rgba(0, 0, 0, 0.4)'
-                        : '0 20px 40px rgba(0, 0, 0, 0.15)',
-                      '&::before': {
-                        opacity: 1,
-                      },
+                      borderColor: theme.palette.mode === 'light' ? 'rgba(0, 0, 0, 0.2)' : 'rgba(255, 215, 0, 0.3)',
+                      boxShadow: theme.palette.mode === 'light' 
+                        ? '0 20px 40px rgba(0, 0, 0, 0.15)'
+                        : '0 20px 40px rgba(0, 0, 0, 0.4)',
                       '& .icon': {
                         transform: 'scale(1.2)',
-                        color: '#FFD700',
+                        ...gradientText
                       }
                     },
                   }}
@@ -209,9 +203,9 @@ const Contact = () => {
                   <Box
                     className="icon"
                     sx={{
-                      color: theme.palette.mode === 'dark' ? 'grey.300' : 'black',
                       mb: 3,
                       transition: 'all 0.3s ease',
+                      ...gradientText
                     }}
                   >
                     {info.icon}
@@ -220,17 +214,17 @@ const Contact = () => {
                     variant="h6" 
                     gutterBottom 
                     sx={{ 
-                      color: theme.palette.mode === 'dark' ? 'grey.100' : 'black',
                       fontFamily: '"Inter", sans-serif',
                       fontWeight: 600,
+                      color: theme.palette.mode === 'dark' ? 'white' : '#1a1a1a'
                     }}
                   >
                     {info.title}
                   </Typography>
                   <Typography 
                     sx={{ 
-                      color: theme.palette.mode === 'dark' ? 'grey.400' : 'black',
                       fontFamily: '"Inter", sans-serif',
+                      color: theme.palette.mode === 'dark' ? 'white' : '#1a1a1a'
                     }}
                   >
                     {info.detail}
@@ -242,9 +236,7 @@ const Contact = () => {
         </Grid>
 
         {/* Contact Form */}
-        <MotionDiv
-          variants={itemVariants}
-        >
+        <MotionDiv variants={itemVariants}>
           <Paper
             component="form"
             onSubmit={handleSubmit}
@@ -254,24 +246,17 @@ const Contact = () => {
               p: { xs: 3, md: 6 },
               bgcolor: theme.palette.mode === 'dark' ? 'rgba(0, 0, 0, 0.5)' : 'rgba(255, 255, 255, 0.5)',
               backdropFilter: 'blur(10px)',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
+              border: '1px solid',
+              borderColor: theme.palette.mode === 'light' ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 215, 0, 0.2)',
               borderRadius: '20px',
               position: 'relative',
               overflow: 'hidden',
-              '&::before': {
-                content: '""',
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
-                background: `linear-gradient(45deg, ${theme.palette.primary.main}11, ${theme.palette.secondary.main}11)`,
-                opacity: 0,
-                transition: 'opacity 0.3s ease',
-              },
-              '&:hover::before': {
-                opacity: 1,
-              },
+              boxShadow: lightModeShadow,
+              '&:hover': {
+                boxShadow: theme.palette.mode === 'light' 
+                  ? '0 20px 40px rgba(0, 0, 0, 0.15)'
+                  : '0 20px 40px rgba(0, 0, 0, 0.4)',
+              }
             }}
           >
             <Stack spacing={4}>
@@ -282,23 +267,21 @@ const Contact = () => {
                 fullWidth
                 sx={{
                   '& .MuiOutlinedInput-root': {
-                    borderRadius: '10px',
                     '& fieldset': {
-                      borderColor: 'rgba(255, 255, 255, 0.1)',
-                      borderRadius: '10px',
+                      borderColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.23)' : 'rgba(0, 0, 0, 0.23)',
                     },
                     '&:hover fieldset': {
-                      borderColor: 'rgba(255, 255, 255, 0.2)',
+                      borderColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.4)' : 'rgba(0, 0, 0, 0.4)',
                     },
                     '&.Mui-focused fieldset': {
-                      borderColor: theme.palette.primary.main,
+                      borderColor: '#9370DB',
                     },
                   },
                   '& .MuiInputLabel-root': {
-                    color: theme.palette.mode === 'dark' ? 'grey.400' : 'black',
+                    color: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.7)',
                   },
                   '& .MuiOutlinedInput-input': {
-                    color: theme.palette.mode === 'dark' ? 'grey.100' : 'black',
+                    color: theme.palette.mode === 'dark' ? 'white' : '#1a1a1a',
                   },
                 }}
               />
@@ -310,23 +293,21 @@ const Contact = () => {
                 fullWidth
                 sx={{
                   '& .MuiOutlinedInput-root': {
-                    borderRadius: '10px',
                     '& fieldset': {
-                      borderColor: 'rgba(255, 255, 255, 0.1)',
-                      borderRadius: '10px',
+                      borderColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.23)' : 'rgba(0, 0, 0, 0.23)',
                     },
                     '&:hover fieldset': {
-                      borderColor: 'rgba(255, 255, 255, 0.2)',
+                      borderColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.4)' : 'rgba(0, 0, 0, 0.4)',
                     },
                     '&.Mui-focused fieldset': {
-                      borderColor: theme.palette.primary.main,
+                      borderColor: '#9370DB',
                     },
                   },
                   '& .MuiInputLabel-root': {
-                    color: theme.palette.mode === 'dark' ? 'grey.400' : 'black',
+                    color: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.7)',
                   },
                   '& .MuiOutlinedInput-input': {
-                    color: theme.palette.mode === 'dark' ? 'grey.100' : 'black',
+                    color: theme.palette.mode === 'dark' ? 'white' : '#1a1a1a',
                   },
                 }}
               />
@@ -339,23 +320,21 @@ const Contact = () => {
                 fullWidth
                 sx={{
                   '& .MuiOutlinedInput-root': {
-                    borderRadius: '10px',
                     '& fieldset': {
-                      borderColor: 'rgba(255, 255, 255, 0.1)',
-                      borderRadius: '10px',
+                      borderColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.23)' : 'rgba(0, 0, 0, 0.23)',
                     },
                     '&:hover fieldset': {
-                      borderColor: 'rgba(255, 255, 255, 0.2)',
+                      borderColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.4)' : 'rgba(0, 0, 0, 0.4)',
                     },
                     '&.Mui-focused fieldset': {
-                      borderColor: theme.palette.primary.main,
+                      borderColor: '#9370DB',
                     },
                   },
                   '& .MuiInputLabel-root': {
-                    color: theme.palette.mode === 'dark' ? 'grey.400' : 'black',
+                    color: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.7)',
                   },
                   '& .MuiOutlinedInput-input': {
-                    color: theme.palette.mode === 'dark' ? 'grey.100' : 'black',
+                    color: theme.palette.mode === 'dark' ? 'white' : '#1a1a1a',
                   },
                 }}
               />
@@ -373,37 +352,17 @@ const Contact = () => {
                   fontFamily: '"Inter", sans-serif',
                   fontWeight: 600,
                   letterSpacing: '0.5px',
-                  color: theme.palette.mode === 'dark' ? 'grey.300' : 'black',
-                  borderColor: theme.palette.mode === 'dark' ? 'grey.300' : 'black',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  '&::before': {
-                    content: '""',
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
-                    opacity: 0,
-                    transition: 'opacity 0.3s ease',
-                    zIndex: -1,
-                  },
+                  ...gradientText,
+                  borderColor: theme.palette.mode === 'light' ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 215, 0, 0.2)',
                   '&:hover': {
                     borderWidth: 2,
-                    borderColor: 'transparent',
-                    color: '#fff',
-                    '&::before': {
-                      opacity: 1,
-                    },
+                    background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+                    color: 'white',
+                    WebkitTextFillColor: 'white',
                     '& .MuiButton-endIcon': {
-                      transform: 'translateX(4px)',
-                      color: '#fff',
-                    },
-                  },
-                  '& .MuiButton-endIcon': {
-                    transition: 'transform 0.3s ease, color 0.3s ease',
-                  },
+                      color: 'white',
+                    }
+                  }
                 }}
               >
                 {isSubmitting ? 'Sending...' : 'Send Message'}

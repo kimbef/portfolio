@@ -8,7 +8,8 @@ import {
   IconButton,
   Card,
   CardContent,
-  Grid
+  Grid,
+  Container
 } from '@mui/material'
 import {
   GitHub as GitHubIcon,
@@ -63,148 +64,163 @@ const Home = () => {
       sx={{ position: 'relative' }}
     >
       {/* Hero Section */}
-      <Box sx={{ pt: { xs: 4, md: 6 }, mb: 12 }}>
-        <Box sx={{ 
-          maxWidth: 800,
-          mx: 'auto',
-          px: 3,
-        }}>
-          <motion.div variants={itemVariants}>
-            <Typography 
-              component="h1"
-              sx={{ 
-                fontWeight: 800,
-                fontSize: { xs: '2rem', md: '3rem' },
+      <Box 
+        sx={{ 
+          minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          py: 12,
+          textAlign: 'left',
+          background: theme.palette.mode === 'dark' ? '#121212' : '#1a1a1a',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
+      >
+        <Container maxWidth={false}>
+         
+
+          <motion.div 
+            variants={itemVariants}
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <Typography
+              sx={{
+                fontSize: { xs: '8vw', sm: '8vw', md: '8vw' },
+                fontWeight: 500,
+                lineHeight: 0.7,
                 letterSpacing: '-0.02em',
-                color: theme.palette.mode === 'dark' ? 'white' : 'black',
-                mb: 3,
-                fontFamily: '"Press Start 2P", cursive',
-                '& .highlight': {
-                  background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
-                  backgroundClip: 'text',
-                  color: 'transparent',
-                  display: 'inline-block',
-                  position: 'relative',
-                  cursor: 'pointer',
-                  textDecoration: 'none',
-                  '&::after': {
-                    content: '""',
-                    position: 'absolute',
-                    width: '100%',
-                    height: '2px',
-                    bottom: 0,
-                    left: 0,
-                    background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
-                    transform: 'scaleX(0)',
-                    transition: 'transform 0.3s ease',
-                  }
-                },
-                '&:hover .highlight::after': {
-                  transform: 'scaleX(1)',
-                }
-              }}
-            >
-              Hi, I'm <Link to="/about" className="highlight">Kliment Petrov</Link>
-            </Typography>
-          </motion.div>
-          
-          <motion.div variants={itemVariants}>
-            <Typography 
-              component="h2"
-              sx={{ 
-                color: theme.palette.mode === 'dark' ? 'grey.300' : 'grey.800',
-                mb: 6,
+                color: 'rgba(255,255,255,0.2)',
+                mb: 2,
                 fontFamily: '"Inter", sans-serif',
-                lineHeight: 1.8,
-                fontSize: { xs: '1.1rem', md: '1.25rem' },
+                textShadow: '2px 2px 4px rgba(0,0,0,0.2)',
+                transform: 'translateZ(0)',
               }}
             >
-              A passionate Frontend Developer crafting beautiful web experiences with modern technologies.
-              Specializing in React and TypeScript to build responsive, user-friendly applications.
+              FRONT
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: { xs: '8vw', sm: '8vw', md: '8vw' },
+                fontWeight: 500,
+                lineHeight: 0.7,
+                letterSpacing: '-0.02em',
+                color: 'rgba(255,255,255,0.2)',
+                mb: 2,
+                fontFamily: '"Inter", sans-serif',
+                textShadow: '2px 2px 4px rgba(0,0,0,0.2)',
+                transform: 'translateZ(0)',
+              }}
+            >
+              END
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: { xs: '8vw', sm: '8vw', md: '8vw' },
+                fontWeight: 500,
+                lineHeight: 0.7,
+                letterSpacing: '-0.02em',
+                color: 'rgba(255,255,255,0.2)',
+                mb: 4,
+                fontFamily: '"Inter", sans-serif',
+                textShadow: '2px 2px 4px rgba(0,0,0,0.2)',
+                transform: 'translateZ(0)',
+              }}
+            >
+              DEVELOPER
             </Typography>
           </motion.div>
 
-          <Stack 
-            component={motion.div}
-            variants={itemVariants}
-            direction={{ xs: 'column', sm: 'row' }} 
-            spacing={3}
-          >
-            <Button
-              component={Link}
-              to="/projects"
-              variant="outlined"
-              size="large"
-              endIcon={<ArrowForwardIcon />}
-              sx={{
-                px: 6,
-                py: 2,
-                borderWidth: 2,
-                borderRadius: '30px',
-                fontFamily: '"Inter", sans-serif',
-                fontWeight: 600,
-                letterSpacing: '0.5px',
-                color: theme.palette.mode === 'dark' ? 'grey.300' : 'black',
-                borderColor: theme.palette.mode === 'dark' ? 'grey.300' : 'black',
-                position: 'relative',
-                overflow: 'hidden',
-                '&::before': {
-                  content: '""',
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '100%',
-                  height: '100%',
-                  background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
-                  opacity: 0,
-                  transition: 'opacity 0.3s ease',
-                  zIndex: -1,
-                },
-                '&:hover': {
-                  borderWidth: 2,
-                  borderColor: 'transparent',
-                  color: '#fff',
-                  '&::before': {
-                    opacity: 1,
-                  },
-                  '& .MuiButton-endIcon': {
-                    transform: 'translateX(4px)',
-                    color: '#fff',
-                  },
-                },
-                '& .MuiButton-endIcon': {
-                  transition: 'transform 0.3s ease, color 0.3s ease',
-                },
-              }}
+          <Box sx={{ position: 'relative', zIndex: 2, maxWidth: '600px', mt: 8 }}>
+            <motion.div 
+              variants={itemVariants}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
             >
-              View My Work
-            </Button>
-            <Button
-              component={Link}
-              to="/contact"
-              variant="outlined"
-              size="large"
-              sx={{
-                px: 6,
-                py: 2,
-                borderWidth: 2,
-                borderRadius: '30px',
-                fontFamily: '"Inter", sans-serif',
-                fontWeight: 600,
-                letterSpacing: '0.5px',
-                color: theme.palette.mode === 'dark' ? 'grey.300' : 'black',
-                borderColor: theme.palette.mode === 'dark' ? 'grey.300' : 'black',
-                '&:hover': {
-                  borderWidth: 2,
-                  borderColor: theme.palette.primary.main,
-                  color: theme.palette.primary.main,
-                },
-              }}
-            >
-              Contact Me
-            </Button>
-          </Stack>
-        </Box>
+              <Typography
+                sx={{
+                  color: theme.palette.mode === 'dark' ? 'white' : '#1a1a1a',
+                  fontSize: { xs: '1rem', md: '1.2rem' },
+                  lineHeight: 1.8,
+                  mb: 4,
+                  opacity: 0.9,
+                  textShadow: '1px 1px 2px rgba(0,0,0,0.1)',
+                }}
+              >
+               Hi, I'm Kliment Petrov, a Frontend Developer passionate about creating beautiful and functional web applications.
+              </Typography>
+
+              <Stack 
+                direction={{ xs: 'column', sm: 'row' }} 
+                spacing={3}
+                sx={{ mt: { xs: 6, md: 4 } }}
+              >
+                <Button
+                  component={Link}
+                  to="/projects"
+                  variant="outlined"
+                  size="large"
+                  endIcon={<ArrowForwardIcon />}
+                  sx={{
+                    px: 6,
+                    py: 2,
+                    borderWidth: 2,
+                    borderRadius: '30px',
+                    fontFamily: '"Inter", sans-serif',
+                    fontWeight: 600,
+                    letterSpacing: '0.5px',
+                    color: theme.palette.mode === 'dark' ? 'white' : '#1a1a1a',
+                    borderColor: theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.3)',
+                    transition: 'all 0.3s ease-in-out',
+                    background: theme.palette.mode === 'dark' 
+                      ? 'linear-gradient(45deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.05) 100%)'
+                      : 'linear-gradient(45deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.05) 100%)',
+                    '&:hover': {
+                      borderColor: theme.palette.mode === 'dark' ? 'white' : '#1a1a1a',
+                      backgroundColor: theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
+                      transform: 'translateY(-2px)',
+                      boxShadow: '0 5px 15px rgba(0,0,0,0.2)',
+                    },
+                  }}
+                >
+                  View My Work
+                </Button>
+                <Button
+                  component={Link}
+                  to="/contact"
+                  variant="outlined"
+                  size="large"
+                  sx={{
+                    px: 6,
+                    py: 2,
+                    borderWidth: 2,
+                    borderRadius: '30px',
+                    fontFamily: '"Inter", sans-serif',
+                    fontWeight: 600,
+                    letterSpacing: '0.5px',
+                    color: theme.palette.mode === 'dark' ? 'white' : '#1a1a1a',
+                    borderColor: theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.3)',
+                    transition: 'all 0.3s ease-in-out',
+                    background: theme.palette.mode === 'dark' 
+                      ? 'linear-gradient(45deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.05) 100%)'
+                      : 'linear-gradient(45deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.05) 100%)',
+                    '&:hover': {
+                      borderColor: theme.palette.mode === 'dark' ? 'white' : '#1a1a1a',
+                      backgroundColor: theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
+                      transform: 'translateY(-2px)',
+                      boxShadow: '0 5px 15px rgba(0,0,0,0.2)',
+                    },
+                  }}
+                >
+                  Contact Me
+                </Button>
+              </Stack>
+            </motion.div>
+          </Box>
+        </Container>
       </Box>
 
       {/* Fancy Text Section */}
@@ -214,8 +230,8 @@ const Home = () => {
           py: 12,
           textAlign: 'center',
           background: theme.palette.mode === 'dark' 
-            ? 'linear-gradient(180deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0) 100%)'
-            : 'linear-gradient(180deg, rgba(255, 215, 0, 0.05) 0%, rgba(255, 215, 0, 0.02) 100%)',
+            ? 'white'
+            : '#1a1a1a',
           position: 'relative',
           overflow: 'hidden',
           '&::before': {
@@ -243,9 +259,7 @@ const Home = () => {
               fontFamily: '"Playfair Display", serif',
               letterSpacing: '-0.02em',
               lineHeight: 1.2,
-              background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
-              backgroundClip: 'text',
-              color: 'transparent',
+              color: theme.palette.mode === 'dark' ? '#1a1a1a' : 'white',
               textTransform: 'uppercase',
               mb: 2,
             }}
@@ -267,9 +281,7 @@ const Home = () => {
               fontFamily: '"Playfair Display", serif',
               letterSpacing: '-0.02em',
               lineHeight: 1.2,
-              background: `linear-gradient(135deg, ${theme.palette.secondary.main}, ${theme.palette.primary.main})`,
-              backgroundClip: 'text',
-              color: 'transparent',
+              color: theme.palette.mode === 'dark' ? '#1a1a1a' : 'white',
               textTransform: 'uppercase',
             }}
           >
@@ -292,7 +304,7 @@ const Home = () => {
               mb: 8,
               pb: 2,
               fontFamily: '"Playfair Display", serif',
-              color: theme.palette.mode === 'dark' ? 'grey.100' : 'black',
+              color: theme.palette.mode === 'dark' ? 'white' : '#1a1a1a',
               '&::after': {
                 content: '""',
                 position: 'absolute',
@@ -316,7 +328,9 @@ const Home = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.2 }}
-                whileHover={{ y: -10 }}
+                whileHover={{ y: -10, boxShadow: theme.palette.mode === 'dark' 
+                  ? '0 10px 30px rgba(0, 0, 0, 0.5)'
+                  : '0 10px 30px rgba(0, 0, 0, 0.15)' }}
                 sx={{
                   height: '100%',
                   bgcolor: theme.palette.mode === 'dark' ? 'grey.900' : 'white',
@@ -324,15 +338,22 @@ const Home = () => {
                   boxShadow: theme.palette.mode === 'dark' 
                     ? '0 4px 20px rgba(0, 0, 0, 0.3)'
                     : '0 4px 20px rgba(0, 0, 0, 0.1)',
+                  transition: 'all 0.3s ease-in-out',
                 }}
               >
                 <CardContent sx={{ p: 4 }}>
                   <Box
                     sx={{
-                      color: theme.palette.primary.main,
+                      color: '#9370DB',
                       mb: 3,
                       transform: 'scale(1.2)',
                       transformOrigin: 'left',
+                      opacity: 0.9,
+                      transition: 'all 0.3s ease-in-out',
+                      '&:hover': {
+                        transform: 'scale(1.3)',
+                        opacity: 1,
+                      }
                     }}
                   >
                     {skill.icon}
@@ -343,7 +364,7 @@ const Home = () => {
                     sx={{
                       fontFamily: '"Inter", sans-serif',
                       fontWeight: 600,
-                      color: theme.palette.mode === 'dark' ? 'grey.100' : 'black',
+                      color: theme.palette.mode === 'dark' ? 'white' : '#1a1a1a',
                     }}
                   >
                     {skill.title}
@@ -351,7 +372,7 @@ const Home = () => {
                   <Typography 
                     variant="body1" 
                     sx={{
-                      color: theme.palette.mode === 'dark' ? 'grey.400' : 'grey.700',
+                      color: theme.palette.mode === 'dark' ? 'white' : '#1a1a1a',
                       lineHeight: 1.7,
                       fontFamily: '"Inter", sans-serif',
                     }}
@@ -383,9 +404,9 @@ const Home = () => {
             rel="noopener noreferrer"
             sx={{
               p: 2,
-              color: theme.palette.mode === 'dark' ? 'grey.300' : 'black',
+              color: theme.palette.mode === 'dark' ? 'white' : '#1a1a1a',
               '&:hover': {
-                bgcolor: theme.palette.mode === 'dark' ? 'grey.800' : 'grey.100',
+                bgcolor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
                 color: theme.palette.primary.main,
               },
             }}
@@ -399,9 +420,9 @@ const Home = () => {
             rel="noopener noreferrer"
             sx={{
               p: 2,
-              color: theme.palette.mode === 'dark' ? 'grey.300' : 'black',
+              color: theme.palette.mode === 'dark' ? 'white' : '#1a1a1a',
               '&:hover': {
-                bgcolor: theme.palette.mode === 'dark' ? 'grey.800' : 'grey.100',
+                bgcolor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
                 color: theme.palette.primary.main,
               },
             }}

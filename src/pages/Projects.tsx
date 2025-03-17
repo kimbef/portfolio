@@ -91,6 +91,16 @@ const Projects = () => {
     }
   }
 
+  const gradientText = {
+    background: 'linear-gradient(45deg,rgb(146, 10, 10),rgb(255, 255, 255))',
+    backgroundClip: 'text',
+    WebkitBackgroundClip: 'text',
+    color: 'transparent',
+    WebkitTextFillColor: 'transparent'
+  }
+
+  const lightModeShadow = theme.palette.mode === 'light' ? '0 8px 32px rgba(0, 0, 0, 0.1)' : 'none'
+
   return (
     <Container maxWidth="lg">
       <MotionBox
@@ -125,11 +135,11 @@ const Projects = () => {
             gutterBottom
             sx={{
               fontWeight: 'bold',
-              color: '#FFD700',
               fontFamily: '"Playfair Display", serif',
               fontSize: { xs: '2.5rem', md: '3.5rem' },
               mb: 3,
               position: 'relative',
+              ...gradientText,
               '&::before': {
                 content: '""',
                 position: 'absolute',
@@ -137,7 +147,7 @@ const Projects = () => {
                 left: '-5%',
                 width: '110%',
                 height: '100%',
-                backgroundColor: 'rgba(255, 215, 0, 0.1)',
+                backgroundColor: theme.palette.mode === 'light' ? 'rgba(0, 0, 0, 0.03)' : 'rgba(255, 215, 0, 0.1)',
                 borderRadius: '8px',
                 zIndex: -1,
               }
@@ -172,19 +182,17 @@ const Projects = () => {
                   bgcolor: theme.palette.mode === 'dark' ? 'rgba(18, 18, 18, 0.8)' : 'rgba(255, 255, 255, 0.8)',
                   backdropFilter: 'blur(10px)',
                   border: '1px solid',
-                  borderColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)',
+                  borderColor: theme.palette.mode === 'light' ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 215, 0, 0.2)',
                   borderRadius: '20px',
                   overflow: 'hidden',
                   transition: 'all 0.3s ease',
-                  boxShadow: theme.palette.mode === 'dark' 
-                    ? '0 8px 32px rgba(0, 0, 0, 0.3)'
-                    : '0 8px 32px rgba(0, 0, 0, 0.1)',
+                  boxShadow: lightModeShadow,
                   '&:hover': {
                     transform: 'translateY(-10px)',
-                    borderColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
-                    boxShadow: theme.palette.mode === 'dark' 
-                      ? '0 20px 40px rgba(0, 0, 0, 0.4)'
-                      : '0 20px 40px rgba(0, 0, 0, 0.15)',
+                    borderColor: theme.palette.mode === 'light' ? 'rgba(0, 0, 0, 0.2)' : 'rgba(255, 215, 0, 0.3)',
+                    boxShadow: theme.palette.mode === 'light' 
+                      ? '0 20px 40px rgba(0, 0, 0, 0.15)'
+                      : '0 20px 40px rgba(0, 0, 0, 0.4)',
                   },
                 }}
               >
@@ -259,42 +267,77 @@ const Projects = () => {
                   <Stack spacing={2}>
                     <Box>
                       <Typography
-                        variant="h6"
+                        variant="h5"
                         gutterBottom
                         sx={{
-                          fontFamily: '"Inter", sans-serif',
                           fontWeight: 600,
-                          color: theme.palette.mode === 'dark' ? 'grey.100' : 'black',
+                          fontFamily: '"Inter", sans-serif',
+                          color: theme.palette.mode === 'dark' ? 'white' : '#1a1a1a'
                         }}
                       >
                         {project.title}
                       </Typography>
                       <Typography
-                        variant="body2"
+                        variant="body1"
                         sx={{
+                          mb: 3,
                           fontFamily: '"Inter", sans-serif',
-                          color: theme.palette.mode === 'dark' ? 'grey.400' : 'grey.700',
-                          mb: 2,
+                          color: theme.palette.mode === 'dark' ? 'white' : '#1a1a1a'
                         }}
                       >
                         {project.description}
                       </Typography>
                     </Box>
-                    <Stack direction="row" spacing={1} flexWrap="wrap" gap={1}>
+                    <Stack direction="row" spacing={1} mb={2}>
                       {project.tags.map((tag, tagIndex) => (
                         <Chip
                           key={tagIndex}
                           label={tag}
-                          size="small"
                           sx={{
-                            bgcolor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
-                            color: theme.palette.mode === 'dark' ? 'grey.300' : 'black',
+                            bgcolor: 'transparent',
+                            border: '1px solid',
+                            borderColor: '#9370DB',
+                            color: '#9370DB',
                             '&:hover': {
-                              bgcolor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.2)',
+                              bgcolor: 'rgba(147, 112, 219, 0.1)',
                             },
                           }}
                         />
                       ))}
+                    </Stack>
+                    <Stack direction="row" spacing={2}>
+                      <Button
+                        startIcon={<GitHubIcon />}
+                        href={project.githubLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        sx={{
+                          color: '#9370DB',
+                          borderColor: '#9370DB',
+                          '&:hover': {
+                            borderColor: '#B19CD9',
+                            bgcolor: 'rgba(147, 112, 219, 0.1)',
+                          },
+                        }}
+                      >
+                        Code
+                      </Button>
+                      <Button
+                        startIcon={<LaunchIcon />}
+                        href={project.demoLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        sx={{
+                          color: '#9370DB',
+                          borderColor: '#9370DB',
+                          '&:hover': {
+                            borderColor: '#B19CD9',
+                            bgcolor: 'rgba(147, 112, 219, 0.1)',
+                          },
+                        }}
+                      >
+                        Live Demo
+                      </Button>
                     </Stack>
                   </Stack>
                 </CardContent>

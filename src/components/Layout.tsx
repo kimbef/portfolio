@@ -38,8 +38,12 @@ const Layout = ({ children }: LayoutProps) => {
   const customTheme = createTheme({
     palette: {
       mode: isDark ? 'dark' : 'light',
-      primary: { main: '#FFD700' },
+      primary: { main: '#9370DB' },
       secondary: { main: '#fff' },
+      text: {
+        primary: isDark ? '#fff' : '#1a1a1a',
+        secondary: isDark ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.7)'
+      }
     },
   });
 
@@ -63,16 +67,36 @@ const Layout = ({ children }: LayoutProps) => {
           to={link.path}
           style={{
             margin: '0 10px',
-            color: isDark ? 'white' : 'black',
             textDecoration: 'none',
+            position: 'relative',
           }}
         >
           <Typography
             sx={{
-              transition: 'color 0.3s',
-              '&:hover': { color: customTheme.palette.primary.main },
+              transition: 'all 0.3s ease',
+              '&:hover': { 
+                color: '#1E90FF',
+                transform: 'translateY(-2px)'
+              },
               fontWeight: link.path === window.location.pathname ? 'bold' : 'normal',
-              color: link.path === window.location.pathname ? customTheme.palette.primary.main : 'inherit',
+              color: theme => theme.palette.mode === 'dark' ? 'white' : '#1a1a1a',
+              position: 'relative',
+              '&::after': {
+                content: '""',
+                position: 'absolute',
+                bottom: -2,
+                left: 0,
+                width: '100%',
+                height: '2px',
+                background: '#1E90FF',
+                transform: 'scaleX(0)',
+                transformOrigin: 'right',
+                transition: 'transform 0.3s ease',
+              },
+              '&:hover::after': {
+                transform: 'scaleX(1)',
+                transformOrigin: 'left',
+              },
             }}
           >
             {link.text}
@@ -89,7 +113,32 @@ const Layout = ({ children }: LayoutProps) => {
         minHeight: '100vh', 
         bgcolor: isDark ? 'black' : 'white',
         color: isDark ? 'white' : 'black',
-        transition: 'background-color 0.3s ease, color 0.3s ease'
+        transition: 'background-color 0.3s ease, color 0.3s ease',
+        position: 'relative',
+        '&::before': {
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: theme => `url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='${theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.03)'}'%3E%3Ctext x='25%25' y='15%25' font-family='monospace' font-size='10'%3E10110%3C/text%3E%3Ctext x='75%25' y='35%25' font-family='monospace' font-size='10'%3E01001%3C/text%3E%3Ctext x='15%25' y='55%25' font-family='monospace' font-size='10'%3E11010%3C/text%3E%3Ctext x='65%25' y='75%25' font-family='monospace' font-size='10'%3E00101%3C/text%3E%3Ctext x='35%25' y='95%25' font-family='monospace' font-size='10'%3E10011%3C/text%3E%3C/g%3E%3C/svg%3E")`,
+          opacity: 0.7,
+          zIndex: 0,
+          animation: 'matrix 20s linear infinite',
+        },
+        '@keyframes matrix': {
+          '0%': {
+            backgroundPosition: '0 0'
+          },
+          '100%': {
+            backgroundPosition: '200px 200px'
+          }
+        },
+        '& > *': {
+          position: 'relative',
+          zIndex: 1,
+        }
       }}>
         <AppBar 
           position="fixed" 
@@ -110,7 +159,7 @@ const Layout = ({ children }: LayoutProps) => {
                 to="/" 
                 sx={{ 
                   textDecoration: 'none', 
-                  color: '#FFD700',
+                  color: '#9370DB',
                   fontWeight: 'bold',
                   fontSize: '2rem',
                 }}
