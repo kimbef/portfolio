@@ -22,10 +22,7 @@ import { motion } from 'framer-motion'
 
 // Wrap MUI components with motion
 const MotionBox = motion(Box)
-const MotionTypography = motion(Typography)
 const MotionCard = motion(Card)
-const MotionButton = motion(Button)
-const MotionIconButton = motion(IconButton)
 
 const Home = () => {
   const theme = useTheme()
@@ -72,57 +69,60 @@ const Home = () => {
           mx: 'auto',
           px: 3,
         }}>
-          <MotionTypography 
-            variant="h1" 
-            component="h1" 
-            variants={itemVariants}
-            sx={{ 
-              fontWeight: 800,
-              fontSize: { xs: '2.5rem', md: '4rem' },
-              letterSpacing: '-0.02em',
-              color: theme.palette.mode === 'dark' ? 'white' : 'black',
-              mb: 3,
-              fontFamily: '"Playfair Display", serif',
-              '& .highlight': {
-                background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
-                backgroundClip: 'text',
-                color: 'transparent',
-                display: 'inline-block',
-                position: 'relative',
-                '&::after': {
-                  content: '""',
-                  position: 'absolute',
-                  width: '100%',
-                  height: '2px',
-                  bottom: 0,
-                  left: 0,
+          <motion.div variants={itemVariants}>
+            <Typography 
+              component="h1"
+              sx={{ 
+                fontWeight: 800,
+                fontSize: { xs: '2rem', md: '3rem' },
+                letterSpacing: '-0.02em',
+                color: theme.palette.mode === 'dark' ? 'white' : 'black',
+                mb: 3,
+                fontFamily: '"Press Start 2P", cursive',
+                '& .highlight': {
                   background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
-                  transform: 'scaleX(0)',
-                  transition: 'transform 0.3s ease',
+                  backgroundClip: 'text',
+                  color: 'transparent',
+                  display: 'inline-block',
+                  position: 'relative',
+                  cursor: 'pointer',
+                  textDecoration: 'none',
+                  '&::after': {
+                    content: '""',
+                    position: 'absolute',
+                    width: '100%',
+                    height: '2px',
+                    bottom: 0,
+                    left: 0,
+                    background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+                    transform: 'scaleX(0)',
+                    transition: 'transform 0.3s ease',
+                  }
+                },
+                '&:hover .highlight::after': {
+                  transform: 'scaleX(1)',
                 }
-              },
-              '&:hover .highlight::after': {
-                transform: 'scaleX(1)',
-              }
-            }}
-          >
-            Hi, I'm <span className="highlight">Kliment Petrov</span>
-          </MotionTypography>
+              }}
+            >
+              Hi, I'm <Link to="/about" className="highlight">Kliment Petrov</Link>
+            </Typography>
+          </motion.div>
           
-          <MotionTypography 
-            variant="h5" 
-            variants={itemVariants}
-            sx={{ 
-              color: theme.palette.mode === 'dark' ? 'grey.300' : 'grey.800',
-              mb: 6,
-              fontFamily: '"Inter", sans-serif',
-              lineHeight: 1.8,
-              fontSize: { xs: '1.1rem', md: '1.25rem' },
-            }}
-          >
-            A passionate Frontend Developer crafting beautiful web experiences with modern technologies.
-            Specializing in React and TypeScript to build responsive, user-friendly applications.
-          </MotionTypography>
+          <motion.div variants={itemVariants}>
+            <Typography 
+              component="h2"
+              sx={{ 
+                color: theme.palette.mode === 'dark' ? 'grey.300' : 'grey.800',
+                mb: 6,
+                fontFamily: '"Inter", sans-serif',
+                lineHeight: 1.8,
+                fontSize: { xs: '1.1rem', md: '1.25rem' },
+              }}
+            >
+              A passionate Frontend Developer crafting beautiful web experiences with modern technologies.
+              Specializing in React and TypeScript to build responsive, user-friendly applications.
+            </Typography>
+          </motion.div>
 
           <Stack 
             component={motion.div}
@@ -130,38 +130,60 @@ const Home = () => {
             direction={{ xs: 'column', sm: 'row' }} 
             spacing={3}
           >
-            <MotionButton
+            <Button
               component={Link}
               to="/projects"
-              variant="contained"
+              variant="outlined"
               size="large"
               endIcon={<ArrowForwardIcon />}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
               sx={{
-                background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
                 px: 6,
                 py: 2,
-                color: '#fff',
+                borderWidth: 2,
                 borderRadius: '30px',
                 fontFamily: '"Inter", sans-serif',
                 fontWeight: 600,
                 letterSpacing: '0.5px',
-                boxShadow: '0 10px 20px rgba(37, 99, 235, 0.15)',
+                color: theme.palette.mode === 'dark' ? 'grey.300' : 'black',
+                borderColor: theme.palette.mode === 'dark' ? 'grey.300' : 'black',
+                position: 'relative',
+                overflow: 'hidden',
+                '&::before': {
+                  content: '""',
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+                  opacity: 0,
+                  transition: 'opacity 0.3s ease',
+                  zIndex: -1,
+                },
                 '&:hover': {
-                  background: `linear-gradient(45deg, ${theme.palette.primary.dark}, ${theme.palette.secondary.dark})`,
+                  borderWidth: 2,
+                  borderColor: 'transparent',
+                  color: '#fff',
+                  '&::before': {
+                    opacity: 1,
+                  },
+                  '& .MuiButton-endIcon': {
+                    transform: 'translateX(4px)',
+                    color: '#fff',
+                  },
+                },
+                '& .MuiButton-endIcon': {
+                  transition: 'transform 0.3s ease, color 0.3s ease',
                 },
               }}
             >
               View My Work
-            </MotionButton>
-            <MotionButton
+            </Button>
+            <Button
               component={Link}
               to="/contact"
               variant="outlined"
               size="large"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
               sx={{
                 px: 6,
                 py: 2,
@@ -180,7 +202,7 @@ const Home = () => {
               }}
             >
               Contact Me
-            </MotionButton>
+            </Button>
           </Stack>
         </Box>
       </Box>
@@ -192,8 +214,8 @@ const Home = () => {
           py: 12,
           textAlign: 'center',
           background: theme.palette.mode === 'dark' 
-            ? 'linear-gradient(180deg, rgba(37, 99, 235, 0.1) 0%, rgba(37, 99, 235, 0) 100%)'
-            : 'linear-gradient(180deg, rgba(37, 99, 235, 0.05) 0%, rgba(37, 99, 235, 0.02) 100%)',
+            ? 'linear-gradient(180deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0) 100%)'
+            : 'linear-gradient(180deg, rgba(255, 215, 0, 0.05) 0%, rgba(255, 215, 0, 0.02) 100%)',
           position: 'relative',
           overflow: 'hidden',
           '&::before': {
@@ -207,76 +229,84 @@ const Home = () => {
           }
         }}
       >
-        <MotionTypography 
-          variant="h1"
+        <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          sx={{
-            fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4.5rem' },
-            fontWeight: 900,
-            fontFamily: '"Playfair Display", serif',
-            letterSpacing: '-0.02em',
-            lineHeight: 1.2,
-            background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
-            backgroundClip: 'text',
-            color: 'transparent',
-            textTransform: 'uppercase',
-            mb: 2,
-          }}
         >
-          Crafting Digital
-        </MotionTypography>
-        <MotionTypography 
-          variant="h1"
+          <Typography 
+            component="h2"
+            sx={{
+              fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4.5rem' },
+              fontWeight: 900,
+              fontFamily: '"Playfair Display", serif',
+              letterSpacing: '-0.02em',
+              lineHeight: 1.2,
+              background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+              backgroundClip: 'text',
+              color: 'transparent',
+              textTransform: 'uppercase',
+              mb: 2,
+            }}
+          >
+            Crafting Digital
+          </Typography>
+        </motion.div>
+        <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          sx={{
-            fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4.5rem' },
-            fontWeight: 900,
-            fontFamily: '"Playfair Display", serif',
-            letterSpacing: '-0.02em',
-            lineHeight: 1.2,
-            background: `linear-gradient(135deg, ${theme.palette.secondary.main}, ${theme.palette.primary.main})`,
-            backgroundClip: 'text',
-            color: 'transparent',
-            textTransform: 'uppercase',
-          }}
         >
-          Experiences
-        </MotionTypography>
+          <Typography 
+            component="h2"
+            sx={{
+              fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4.5rem' },
+              fontWeight: 900,
+              fontFamily: '"Playfair Display", serif',
+              letterSpacing: '-0.02em',
+              lineHeight: 1.2,
+              background: `linear-gradient(135deg, ${theme.palette.secondary.main}, ${theme.palette.primary.main})`,
+              backgroundClip: 'text',
+              color: 'transparent',
+              textTransform: 'uppercase',
+            }}
+          >
+            Experiences
+          </Typography>
+        </motion.div>
       </MotionBox>
 
       {/* Skills Section */}
       <Box sx={{ pt: 12, pb: 8 }}>
-        <MotionTypography
-          variant="h3"
-          component="h2"
+        <motion.div
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          sx={{
-            position: 'relative',
-            mb: 8,
-            pb: 2,
-            fontFamily: '"Playfair Display", serif',
-            color: theme.palette.mode === 'dark' ? 'grey.100' : 'black',
-            '&::after': {
-              content: '""',
-              position: 'absolute',
-              bottom: 0,
-              left: 0,
-              width: '80px',
-              height: '4px',
-              background: `linear-gradient(to right, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
-            },
-          }}
         >
-          What I Do
-        </MotionTypography>
+          <Typography
+            component="h2"
+            sx={{
+              position: 'relative',
+              mb: 8,
+              pb: 2,
+              fontFamily: '"Playfair Display", serif',
+              color: theme.palette.mode === 'dark' ? 'grey.100' : 'black',
+              '&::after': {
+                content: '""',
+                position: 'absolute',
+                bottom: 0,
+                left: 0,
+                width: '80px',
+                height: '4px',
+                background: `linear-gradient(to right, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+              },
+            }}
+          >
+            What I Do
+          </Typography>
+        </motion.div>
 
         <Grid container spacing={4}>
           {skills.map((skill, index) => (
@@ -346,12 +376,11 @@ const Home = () => {
           spacing={3} 
           justifyContent="center"
         >
-          <MotionIconButton
-            href="https://github.com/yourusername"
+          <IconButton
+            component="a"
+            href="https://github.com/kimbef"
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ scale: 1.1, rotate: 5 }}
-            whileTap={{ scale: 0.9 }}
             sx={{
               p: 2,
               color: theme.palette.mode === 'dark' ? 'grey.300' : 'black',
@@ -362,13 +391,12 @@ const Home = () => {
             }}
           >
             <GitHubIcon fontSize="large" />
-          </MotionIconButton>
-          <MotionIconButton
-            href="https://linkedin.com/in/your-profile"
+          </IconButton>
+          <IconButton
+            component="a"
+            href="https://linkedin.com/in/kliment-petrov"
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ scale: 1.1, rotate: -5 }}
-            whileTap={{ scale: 0.9 }}
             sx={{
               p: 2,
               color: theme.palette.mode === 'dark' ? 'grey.300' : 'black',
@@ -379,7 +407,7 @@ const Home = () => {
             }}
           >
             <LinkedInIcon fontSize="large" />
-          </MotionIconButton>
+          </IconButton>
         </Stack>
       </Box>
     </MotionBox>

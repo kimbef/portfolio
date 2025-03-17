@@ -38,7 +38,7 @@ const Layout = ({ children }: LayoutProps) => {
   const customTheme = createTheme({
     palette: {
       mode: isDark ? 'dark' : 'light',
-      primary: { main: '#2563eb' },
+      primary: { main: '#FFD700' },
       secondary: { main: '#fff' },
     },
   });
@@ -110,7 +110,7 @@ const Layout = ({ children }: LayoutProps) => {
                 to="/" 
                 sx={{ 
                   textDecoration: 'none', 
-                  color: '#2563eb',
+                  color: '#FFD700',
                   fontWeight: 'bold',
                   fontSize: '2rem',
                 }}
