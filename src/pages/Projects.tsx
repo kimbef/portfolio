@@ -44,12 +44,12 @@ const projects: Project[] = [
     demoLink: 'https://kimbef-portfolio.vercel.app/'
   },
   {
-    title: 'E-Commerce Dashboard',
-    description: 'An admin dashboard for managing products, orders, and customers. Built with React and includes data visualization, real-time updates, and responsive design.',
+    title: 'E-Commerce Online Store',
+    description: 'An online store for buying and selling products. Built with React and includes data visualization, real-time updates, and responsive design.',
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800',
     tags: ['React', 'TypeScript', 'Redux', 'Chart.js', 'Material UI'],
-    githubLink: 'https://github.com/yourusername/dashboard',
-    demoLink: 'https://your-dashboard.com'
+    githubLink: 'https://github.com/kimbef/reakt2',
+    demoLink: 'https://reakt2.vercel.app/'
   },
   {
     title: 'Weather App',
