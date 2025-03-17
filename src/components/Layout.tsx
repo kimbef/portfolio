@@ -2,7 +2,8 @@ import { ReactNode, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   AppBar, Box, Container, IconButton, Toolbar, Typography, useScrollTrigger, 
-  ThemeProvider, createTheme, CssBaseline, Drawer, List, ListItem, ListItemText
+  ThemeProvider, createTheme, CssBaseline, Drawer, List, ListItem, ListItemText,
+  useTheme, useMediaQuery
 } from '@mui/material';
 import { 
   DarkMode as DarkModeIcon, 
@@ -18,6 +19,8 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   const [isDark, setIsDark] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   // Load theme mode from localStorage on mount
   useEffect(() => {
@@ -32,11 +35,11 @@ const Layout = ({ children }: LayoutProps) => {
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
   }, [isDark]);
 
-  const theme = createTheme({
+  const customTheme = createTheme({
     palette: {
       mode: isDark ? 'dark' : 'light',
-      primary: { main: '#2563eb' }, // Blue for interactive elements
-      secondary: { main: '#fff' }, // White for light mode
+      primary: { main: '#2563eb' },
+      secondary: { main: '#fff' },
     },
   });
 
@@ -52,8 +55,35 @@ const Layout = ({ children }: LayoutProps) => {
     { text: 'Contact', path: '/contact' },
   ];
 
+  const NavigationLinks = () => (
+    <>
+      {navigationLinks.map((link) => (
+        <Link
+          key={link.path}
+          to={link.path}
+          style={{
+            margin: '0 10px',
+            color: isDark ? 'white' : 'black',
+            textDecoration: 'none',
+          }}
+        >
+          <Typography
+            sx={{
+              transition: 'color 0.3s',
+              '&:hover': { color: customTheme.palette.primary.main },
+              fontWeight: link.path === window.location.pathname ? 'bold' : 'normal',
+              color: link.path === window.location.pathname ? customTheme.palette.primary.main : 'inherit',
+            }}
+          >
+            {link.text}
+          </Typography>
+        </Link>
+      ))}
+    </>
+  );
+
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={customTheme}>
       <CssBaseline />
       <Box sx={{ 
         minHeight: '100vh', 
@@ -80,36 +110,51 @@ const Layout = ({ children }: LayoutProps) => {
                 to="/" 
                 sx={{ 
                   textDecoration: 'none', 
-                  color: '#2563eb', // Always blue
+                  color: '#2563eb',
                   fontWeight: 'bold',
                   fontSize: '2rem',
                 }}
               >
                 Portfolio
               </Typography>
+
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <IconButton onClick={() => setIsDark(!isDark)} sx={{ color: isDark ? 'white' : 'black' }}>
+                {/* Show navigation links on desktop */}
+                {!isMobile && (
+                  <Box sx={{ display: 'flex', alignItems: 'center', mr: 2 }}>
+                    <NavigationLinks />
+                  </Box>
+                )}
+                
+                <IconButton 
+                  onClick={() => setIsDark(!isDark)} 
+                  sx={{ color: isDark ? 'white' : 'black' }}
+                >
                   {isDark ? <LightModeIcon /> : <DarkModeIcon />}
                 </IconButton>
-                <IconButton 
-                  onClick={() => setIsDrawerOpen(true)}
-                  sx={{ 
-                    color: isDark ? 'white' : 'black',
-                    border: '1px solid',
-                    borderColor: isDark ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.2)',
-                  }}
-                >
-                  <MenuIcon />
-                </IconButton>
+
+                {/* Only show hamburger menu on mobile */}
+                {isMobile && (
+                  <IconButton 
+                    onClick={() => setIsDrawerOpen(true)}
+                    sx={{ 
+                      color: isDark ? 'white' : 'black',
+                      border: '1px solid',
+                      borderColor: isDark ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.2)',
+                    }}
+                  >
+                    <MenuIcon />
+                  </IconButton>
+                )}
               </Box>
             </Toolbar>
           </Container>
         </AppBar>
 
-        {/* Navigation Drawer */}
+        {/* Navigation Drawer (only for mobile) */}
         <Drawer
           anchor="right"
-          open={isDrawerOpen}
+          open={isDrawerOpen && isMobile}
           onClose={() => setIsDrawerOpen(false)}
           PaperProps={{
             sx: {
@@ -120,7 +165,10 @@ const Layout = ({ children }: LayoutProps) => {
           }}
         >
           <Box sx={{ p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <IconButton onClick={() => setIsDark(!isDark)} sx={{ color: isDark ? 'white' : 'black' }}>
+            <IconButton 
+              onClick={() => setIsDark(!isDark)} 
+              sx={{ color: isDark ? 'white' : 'black' }}
+            >
               {isDark ? <LightModeIcon /> : <DarkModeIcon />}
             </IconButton>
             <IconButton 
@@ -140,6 +188,8 @@ const Layout = ({ children }: LayoutProps) => {
                 sx={{ 
                   color: isDark ? 'white' : 'black',
                   textDecoration: 'none',
+                  bgcolor: link.path === window.location.pathname ? 
+                    (isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)') : 'transparent',
                   '&:hover': {
                     bgcolor: isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
                   }
@@ -149,8 +199,10 @@ const Layout = ({ children }: LayoutProps) => {
                   primary={link.text} 
                   primaryTypographyProps={{
                     sx: { 
-                      color: isDark ? 'white' : 'black',
-                      '&:hover': { color: theme.palette.primary.main }
+                      color: link.path === window.location.pathname ? 
+                        customTheme.palette.primary.main : 
+                        (isDark ? 'white' : 'black'),
+                      fontWeight: link.path === window.location.pathname ? 'bold' : 'normal',
                     }
                   }}
                 />

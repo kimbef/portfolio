@@ -41,7 +41,7 @@ const projects: Project[] = [
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800',
     tags: ['React', 'TypeScript', 'Material UI', 'Framer Motion'],
     githubLink: 'https://github.com/kimbef/portfolio',
-    demoLink: 'https://kimbef-portfolio.vercel.app/'
+    demoLink: 'https://portfolio-kimbeff.vercel.app/'
   },
   {
     title: 'E-Commerce Online Store',
@@ -56,8 +56,8 @@ const projects: Project[] = [
     description: 'A beautiful weather application with real-time updates, animations, and detailed forecasts. Features location-based weather data and interactive maps.',
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800',
     tags: ['React', 'TypeScript', 'API Integration', 'Styled Components'],
-    githubLink: 'https://github.com/yourusername/weather-app',
-    demoLink: 'https://your-weather-app.com'
+    githubLink: 'https://github.com/kimbef/forecaster',
+    demoLink: 'https://v0-weather-app-ui-rose.vercel.app/'
   }
 ];
 
