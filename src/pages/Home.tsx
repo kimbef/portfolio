@@ -72,7 +72,7 @@ const Home = () => {
           justifyContent: 'center',
           py: 12,
           textAlign: 'left',
-          background: theme.palette.mode === 'dark' ? '#121212' : '#1a1a1a',
+          background: theme.palette.mode === 'dark' ? '#121212' : '#f5f5f5',
           position: 'relative',
           overflow: 'hidden',
         }}
